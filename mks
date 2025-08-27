@@ -1,0 +1,47 @@
+import pandas as pd
+
+# Exemplo de dados (viria do seu DataFrame)
+dados = {
+    "Acesso": {
+        "Pix": True,
+        "Cartão de débito": True,
+        "Cartão de crédito": True,
+        "Canais digitais": True,
+        "Débito automático": False,
+        "Open Finance (receptor)": False,
+        "Folha de pagamento": False,
+        "Cobrança": False,
+        "Domicílio": False,
+        "Credenciamento ativo": False
+    },
+    "Fluxo de Caixa": {
+        "Valor movimentado": "R$ 298.256,31",
+        "Cartão": "00/20",
+        "Crédito": "20/20 - 100% Sicredi - R$ 751.667,63",
+        "Crédito Agro": "28/30 - 94% Sicredi - R$ 889.709,00"
+    }
+}
+
+def gerar_markdown(dados):
+    md = "## Grupos de Soluções\n\n"
+    
+    # Parte esquerda - Acesso
+    md += "### 🔑 Acesso\n"
+    for k, v in dados["Acesso"].items():
+        simbolo = "✅" if v else "❌"
+        md += f"- {simbolo} {k}\n"
+    
+    md += "\n"
+    
+    # Parte direita - Fluxo de Caixa
+    md += "### 💰 Fluxo de Caixa\n"
+    for k, v in dados["Fluxo de Caixa"].items():
+        md += f"- **{k}:** {v}\n"
+    
+    return md
+
+# Gerar markdown formatado
+markdown_texto = gerar_markdown(dados)
+
+from IPython.display import Markdown
+Markdown(markdown_texto)
